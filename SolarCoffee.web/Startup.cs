@@ -9,8 +9,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using SolarCoffee.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using SolarCoffee.Data.Models;
 
 namespace SolarCoffee.Web
 {
@@ -28,10 +33,17 @@ namespace SolarCoffee.Web
         {
 
             services.AddControllers();
+            services.AddScoped(p => new SolarDBContext(p.GetService<DbContextOptions<SolarDBContext>>()));
+            services.AddDbContext<SolarDBContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SolarCoffee.Web", Version = "v1" });
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
