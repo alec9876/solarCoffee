@@ -21,10 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SolarCoffee.Data\SolarCoffee.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\SolarCoffee.Services\SolarCoffee.Services.csproj" />
   </ItemGroup>
 
 </Project>

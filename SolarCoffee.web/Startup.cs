@@ -16,6 +16,10 @@ using SolarCoffee.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using SolarCoffee.Data.Models;
+using SolarCoffee.Services.Product;
+using SolarCoffee.Services.Inventory;
+using SolarCoffee.Services.Order;
+using SolarCoffee.Services.Customer;
 
 namespace SolarCoffee.Web
 {
@@ -33,15 +37,22 @@ namespace SolarCoffee.Web
         {
 
             services.AddControllers();
+
             services.AddScoped(p => new SolarDBContext(p.GetService<DbContextOptions<SolarDBContext>>()));
             services.AddDbContext<SolarDBContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SolarCoffee.Web", Version = "v1" });
             });
+
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IInventoryService, InventoryService>();
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<ICustomerService, CustomerService>();
 
 
         }
