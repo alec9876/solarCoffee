@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace SolarCoffee.Data.Models
+namespace SolarCoffee.Web.ViewModels
 {
-    public class ProductInventory
+    public class InventoryViewModel
     {
         public int Id { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public int QuantityOnHand { get; set; }
         public int IdealQuantity { get; set; }
-        public Product InventoryProduct { get; set; }
+        public ProductViewModel InventoryProduct { get; set; }
     }
 }

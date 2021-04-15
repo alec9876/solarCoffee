@@ -12,8 +12,8 @@ namespace SolarCoffee.Services.Inventory
     public class InventoryService : IInventoryService
     {
         private readonly SolarDBContext _context;
-        private readonly ILogger _logger;
-        public InventoryService(SolarDBContext context, ILogger logger)
+        private readonly ILogger<InventoryService> _logger;
+        public InventoryService(SolarDBContext context, ILogger<InventoryService> logger)
         {
             _context = context;
             _logger = logger;
@@ -22,15 +22,15 @@ namespace SolarCoffee.Services.Inventory
         public ProductInventory GetByProductId(int productId)
         {
             return _context.ProductInventories
-                .Include(pi => pi.Product)
-                .FirstOrDefault(pi => pi.Product.Id == productId);
+                .Include(pi => pi.InventoryProduct)
+                .FirstOrDefault(pi => pi.InventoryProduct.Id == productId);
         }
 
         public List<ProductInventory> GetCurrentInventory()
         {
             return _context.ProductInventories
-                .Include(pi => pi.Product)
-                .Where(pi => !pi.Product.IsArchived)
+                .Include(pi => pi.InventoryProduct)
+                .Where(pi => !pi.InventoryProduct.IsArchived)
                 .ToList();
         }
 
@@ -50,8 +50,8 @@ namespace SolarCoffee.Services.Inventory
             try
             {
                 var inventory = _context.ProductInventories
-                    .Include(inv => inv.Product)
-                    .First(inventory => inventory.Product.Id == id);
+                    .Include(inv => inv.InventoryProduct)
+                    .First(inventory => inventory.InventoryProduct.Id == id);
 
                 inventory.QuantityOnHand += adjustment;
 
@@ -92,7 +92,7 @@ namespace SolarCoffee.Services.Inventory
             var snapshot = new ProductInventorySnapshot
             {
                 SnapshotTime = now,
-                Product = inventory.Product,
+                Product = inventory.InventoryProduct,
                 QuantityOnHand = inventory.QuantityOnHand
             };
 

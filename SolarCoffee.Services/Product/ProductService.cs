@@ -61,7 +61,7 @@ namespace SolarCoffee.Services.Product
 
                 var newInventory = new ProductInventory
                 {
-                    Product = product,
+                    InventoryProduct = product,
                     QuantityOnHand = 0,
                     IdealQuantity = 10
                 };
