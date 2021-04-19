@@ -20,7 +20,7 @@ namespace SolarCoffee.Web.Serialization
                 UpdatedOn = customer.UpdatedOn,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
-                PrimaryAdress = MapCustomerAddress(customer.PrimaryAdress)
+                PrimaryAddress = MapCustomerAddress(customer.PrimaryAddress)
             };
         }
 
@@ -34,7 +34,7 @@ namespace SolarCoffee.Web.Serialization
                 UpdatedOn = customer.UpdatedOn,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
-                PrimaryAdress = MapCustomerAddress(customer.PrimaryAdress)
+                PrimaryAddress = MapCustomerAddress(customer.PrimaryAddress)
             };
         }
 
@@ -44,14 +44,14 @@ namespace SolarCoffee.Web.Serialization
             return new CustomerAddressViewModel
             {
                 Id = address.Id,
+                CreatedOn = address.CreatedOn,
+                UpdatedOn = address.UpdatedOn,
                 AddressLine1 = address.AddressLine1,
                 AddressLine2 = address.AddressLine2,
                 City = address.City,
                 State = address.State,
                 PostalCode = address.PostalCode,
-                Country = address.Country,
-                CreatedOn = address.CreatedOn,
-                UpdatedOn = address.UpdatedOn
+                Country = address.Country
             };
         }
 
@@ -60,14 +60,14 @@ namespace SolarCoffee.Web.Serialization
         {
             return new CustomerAddress
             {
+                CreatedOn = address.CreatedOn,
+                UpdatedOn = address.UpdatedOn,
                 AddressLine1 = address.AddressLine1,
                 AddressLine2 = address.AddressLine2,
                 City = address.City,
                 State = address.State,
                 PostalCode = address.PostalCode,
-                Country = address.Country,
-                CreatedOn = address.CreatedOn,
-                UpdatedOn = address.UpdatedOn
+                Country = address.Country
             };
         }
     }

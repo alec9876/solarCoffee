@@ -31,6 +31,8 @@ namespace SolarCoffee.Web.Controllers
         [HttpPost]
         public ActionResult GenerateNewOrder([FromBody] InvoiceViewModel invoice)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             _logger.LogInformation("Generating Invoice");
             var order = OrderMapper.SerializeInvoiceToOrder(invoice);
             order.Customer = _customerService.GetById(invoice.CustomerId);
@@ -47,9 +49,11 @@ namespace SolarCoffee.Web.Controllers
             return Ok(orderViewModel);
         }
 
-        [HttpPatch("{id}")]
+        [HttpPatch("complete/{id}")]
         public ActionResult MarkOrderComplete(int id)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             _logger.LogInformation($"Marking order {id} complete");
             _orderService.MarkFulfilled(id);
 

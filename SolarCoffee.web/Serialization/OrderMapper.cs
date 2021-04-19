@@ -17,12 +17,12 @@ namespace SolarCoffee.Web.Serialization
                 {
                     Id = item.Id,
                     Quantity = item.Quantity,
-                    Product = ProductMapper.SerializeProductViewModel(item.Product)
+                    InventoryProduct = ProductMapper.SerializeProductViewModel(item.InventoryProduct)
                 }).ToList();
 
             return new SalesOrder
             {
-                Id = order.Id,
+                SalesOrderItems = salesOrderItems,
                 CreatedOn = order.CreatedOn,
                 UpdatedOn = order.UpdatedOn
             };
@@ -51,7 +51,7 @@ namespace SolarCoffee.Web.Serialization
             {
                 Id = item.Id,
                 Quantity = item.Quantity,
-                Product = ProductMapper.SerializeProductViewModel(item.Product)
+                InventoryProduct = ProductMapper.SerializeProductViewModel(item.InventoryProduct)
             }).ToList();
         }
     }

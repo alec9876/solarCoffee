@@ -31,9 +31,9 @@ namespace SolarCoffee.Services.Order
 
             foreach (var item in order.SalesOrderItems)
             {
-                item.Product = _productService.GetProductById(item.Product.Id);
+                item.InventoryProduct = _productService.GetProductById(item.InventoryProduct.Id);
 
-                var inventoryId = _inventoryService.GetByProductId(item.Product.Id).Id;
+                var inventoryId = _inventoryService.GetByProductId(item.InventoryProduct.Id).Id;
 
                 _inventoryService.UpdateUnitsAvailable(inventoryId, -item.Quantity);
             };
@@ -67,9 +67,9 @@ namespace SolarCoffee.Services.Order
         {
             return _context.SalesOrders
                 .Include(so => so.Customer)
-                    .ThenInclude(c => c.PrimaryAdress)
+                    .ThenInclude(c => c.PrimaryAddress)
                 .Include(so => so.SalesOrderItems)
-                    .ThenInclude(soi => soi.Product)
+                    .ThenInclude(soi => soi.InventoryProduct)
                 .ToList();
         }
 

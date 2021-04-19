@@ -15,10 +15,10 @@ namespace SolarCoffee.Web.Controllers
     [ApiController]
     public class InventoryController : ControllerBase
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<InventoryController> _logger;
         private readonly IInventoryService _inventoryService;
 
-        public InventoryController(ILogger logger, IInventoryService inventoryService)
+        public InventoryController(ILogger<InventoryController> logger, IInventoryService inventoryService)
         {
             _logger = logger;
             _inventoryService = inventoryService;
@@ -40,6 +40,8 @@ namespace SolarCoffee.Web.Controllers
         [HttpPatch]
         public ActionResult UpdateInventory([FromBody] ShipmentViewModel shipment)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             _logger.LogInformation($"Updating inventory for {shipment.ProductId} - Adjustment {shipment.Adjustment}");
 
             var id = shipment.ProductId;

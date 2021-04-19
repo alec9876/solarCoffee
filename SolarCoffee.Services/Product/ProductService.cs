@@ -53,7 +53,7 @@ namespace SolarCoffee.Services.Product
         /// </summary>
         /// <param name="product"></param>
         /// <returns></returns>
-        public ServiceResponse<Data.Models.Product> CreatedProduct(Data.Models.Product product)
+        public ServiceResponse<Data.Models.Product> CreateProduct(Data.Models.Product product)
         {
             try
             {

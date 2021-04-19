@@ -13,6 +13,6 @@ namespace SolarCoffee.Web.ViewModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public CustomerAddressViewModel PrimaryAdress { get; set; }
+        public CustomerAddressViewModel PrimaryAddress { get; set; }
     }
 }

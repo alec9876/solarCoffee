@@ -84,14 +84,14 @@ namespace SolarCoffee.Services.Customer
         public List<Data.Models.Customer> GetAllCustomers()
         {
             return _context.Customers
-                .Include(c => c.PrimaryAdress)
+                .Include(c => c.PrimaryAddress)
                 .OrderBy(c => c.LastName)
                 .ToList();
         }
 
         public Data.Models.Customer GetById(int id)
         {
-            return _context.Customers.Include(c => c.PrimaryAdress).FirstOrDefault(c => c.Id == id);
+            return _context.Customers.Include(c => c.PrimaryAddress).FirstOrDefault(c => c.Id == id);
         }
     }
 }

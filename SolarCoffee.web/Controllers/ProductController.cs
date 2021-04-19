@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SolarCoffee.Services.Product;
 using SolarCoffee.Web.Serialization;
+using SolarCoffee.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,17 @@ namespace SolarCoffee.Web.Controllers
             _productService = productService;
         }
 
+        [HttpPost]
+        public ActionResult AddProduct([FromBody] ProductViewModel product)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            _logger.LogInformation("Adding product");
+            var newProduct = ProductMapper.SerializeProductViewModel(product);
+            var response = _productService.CreateProduct(newProduct);
+            return Ok(response);
+        }
+
         [HttpGet]
         public ActionResult GetProducts()
         {
@@ -39,6 +51,8 @@ namespace SolarCoffee.Web.Controllers
         [HttpPatch("{id}")]
         public ActionResult ArchiveProduct(int id)
         {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
             _logger.LogInformation("Archiving product");
             var archiveResult = _productService.ArchiveProduct(id);
             return Ok(archiveResult);

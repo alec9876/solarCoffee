@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SolarCoffee.Data;
 
 namespace SolarCoffee.Data.Migrations
 {
     [DbContext(typeof(SolarDBContext))]
-    partial class SolarDBContextModelSnapshot : ModelSnapshot
+    [Migration("20210418162611_ChangedSpellingPrimaryAddress")]
+    partial class ChangedSpellingPrimaryAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -409,7 +411,7 @@ namespace SolarCoffee.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("InventoryProductId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -420,7 +422,7 @@ namespace SolarCoffee.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InventoryProductId");
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("SalesOrderId");
 
@@ -508,9 +510,9 @@ namespace SolarCoffee.Data.Migrations
 
             modelBuilder.Entity("SolarCoffee.Data.Models.SalesOrderItem", b =>
                 {
-                    b.HasOne("SolarCoffee.Data.Models.Product", "InventoryProduct")
+                    b.HasOne("SolarCoffee.Data.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("InventoryProductId");
+                        .HasForeignKey("ProductId");
 
                     b.HasOne("SolarCoffee.Data.Models.SalesOrder", null)
                         .WithMany("SalesOrderItems")

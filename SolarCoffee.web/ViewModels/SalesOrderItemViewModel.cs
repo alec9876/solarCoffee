@@ -9,6 +9,6 @@ namespace SolarCoffee.Web.ViewModels
     {
         public int Id { get; set; }
         public int Quantity { get; set; }
-        public ProductViewModel Product { get; set; }
+        public ProductViewModel InventoryProduct { get; set; }
     }
 }
